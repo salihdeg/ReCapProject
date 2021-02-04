@@ -17,8 +17,8 @@ BrandName nvarchar(50) not null
 --Cars Table
 create table Cars(
 Id int primary key identity(1,1),
-BrandId int foreign key references tbl_Brands(BrandId),
-ColorId int foreign key references tbl_Colors(ColorId),
+BrandId int foreign key references Brands(BrandId),
+ColorId int foreign key references Colors(ColorId),
 ModelYear date,
 DailyPrice money not null,
 CarDescription nvarchar(250)
