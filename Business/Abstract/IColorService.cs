@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAccess.Abstract
+namespace Business.Abstract
 {
-    public interface IBrandDal : IEntityRepository<Brand>
+    public interface IColorService : IEntityServiceBase<Color>
     {
 
     }

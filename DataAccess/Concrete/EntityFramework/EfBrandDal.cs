@@ -1,6 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
-using Microsoft.EntityFrameworkCore;
+using Core.DataAccess.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfBrandDal : BaseEntityRepository<Brand> ,IBrandDal
+    public class EfBrandDal : EfEntityRepositoryBase<Brand, ReCapProjectDBContext>, IBrandDal
     {
         
     }
