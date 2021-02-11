@@ -25,18 +25,18 @@ namespace ConsoleUI
             //});
 
             Console.WriteLine("\t\tBrands:");
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.BrandName);
             }
             Console.WriteLine("\t\tColors:");
-            foreach (var color in colorManager.GetAll())
+            foreach (var color in colorManager.GetAll().Data)
             {
                 Console.WriteLine(color.ColorName);
             }
 
             Console.WriteLine("\t\tCar Details:");
-            foreach (var car in carManager.GetCarDetails())
+            foreach (var car in carManager.GetCarDetails().Data)
             {
                 Console.WriteLine("{0} {1} {2} {3}", car.BrandName, car.CarDescription, car.ColorName, car.DailyPrice);
             }
