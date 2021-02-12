@@ -13,5 +13,7 @@ namespace Business.Constants
         public static string Updated = "Düzenlendi";
         public static string Deleted = "Silindi";
         public static string EntityInvalid = "Nesne Kural Dışı";
+        public static string DefaultError = "Bir Hata Oldu";
+        public static string NotAvailable = "Müsait Değil";
     }
 }

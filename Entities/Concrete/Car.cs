@@ -13,5 +13,6 @@ namespace Entities.Concrete
         public DateTime ModelYear { get; set; }
         public decimal DailyPrice { get; set; }
         public string CarDescription { get; set; }
+        public bool IsAvailable { get; set; }
     }
 }

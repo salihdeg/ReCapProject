@@ -7,10 +7,10 @@ using System.Text;
 
 namespace Business.Abstract
 {
-    public interface IBrandService : IEntityServiceBase<Brand>
+    public interface IUserService : IEntityServiceBase<User>
     {
-        IResult Add(Brand brand);
-        IResult Update(Brand brand);
-        IResult Delete(Brand brand);
+        IResult Add(User user);
+        IResult Update(User user);
+        IResult Delete(User user);
     }
 }

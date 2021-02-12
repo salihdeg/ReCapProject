@@ -10,8 +10,5 @@ namespace Core.DataAccess
     {
         IDataResult<List<TEntity>> GetAll();
         IDataResult<TEntity> GetById(int id);
-        IResult Add(TEntity entity);
-        IResult Update(TEntity entity);
-        IResult Delete(TEntity entity);
     }
 }
