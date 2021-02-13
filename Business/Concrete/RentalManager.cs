@@ -19,8 +19,10 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
             _carDal = carDal;
         }
-        public IResult Add(Rental entity, Car car)
+        public IResult Add(Rental entity)
         {
+            Car car = _carDal.Get(c => c.Id == entity.CarId);
+
             if (car.IsAvailable == false)
             {
                 return new ErrorResult(Messages.NotAvailable);

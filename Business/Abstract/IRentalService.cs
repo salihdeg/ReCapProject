@@ -10,7 +10,7 @@ namespace Business.Abstract
 {
     public interface IRentalService : IEntityServiceBase<Rental>
     {
-        IResult Add(Rental rental,Car car);
+        IResult Add(Rental rental);
         IResult Update(Rental rental);
         IResult Delete(Rental rental);
         IDataResult<List<RentalDetailDto>> GetRentalDetail();
