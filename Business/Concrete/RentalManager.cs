@@ -83,7 +83,7 @@ namespace Business.Concrete
         {
             try
             {
-                return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRetalDetails());
+                return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails());
             }
             catch (Exception)
             {

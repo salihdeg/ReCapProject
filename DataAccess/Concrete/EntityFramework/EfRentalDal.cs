@@ -11,7 +11,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfRentalDal : EfEntityRepositoryBase<Rental, ReCapProjectDBContext>, IRentalDal
     {
-        public List<RentalDetailDto> GetRetalDetails()
+        public List<RentalDetailDto> GetRentalDetails()
         {
             using (ReCapProjectDBContext context = new ReCapProjectDBContext())
             {
