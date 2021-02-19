@@ -8,3 +8,8 @@ Edit 07.02.2021  Day 9 Homework https://www.kodlama.io/courses/1235979/lectures/
 Edit 11.02.2021 Day 10 Homework-1 https://www.kodlama.io/courses/1235979/lectures/30341342
 
 Edit 15.02.2021 Day 11 Homework https://www.kodlama.io/courses/1235979/lectures/30416969
+
+Edit 19.02.2021 Day 12 Homeworks:
+  https://www.kodlama.io/courses/1235979/lectures/30497995
+  https://www.kodlama.io/courses/1235979/lectures/30498006
+  https://www.kodlama.io/courses/1235979/lectures/30498008
