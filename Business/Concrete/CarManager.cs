@@ -1,9 +1,13 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation.FluentValidation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,12 +17,10 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         ICarDal _carDal;
-        ICarCheckService _carCheckService;
 
-        public CarManager(ICarDal carDal,ICarCheckService carCheckService)
+        public CarManager(ICarDal carDal)
         {
             _carDal = carDal;
-            _carCheckService = carCheckService;
         }
 
         public IDataResult<List<Car>> GetAll()
@@ -45,22 +47,16 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c=>c.DailyPrice>=min && c.DailyPrice<=max));
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-            if (!_carCheckService.CheckCarRules(car))
-            {
-                return new ErrorResult(Messages.EntityInvalid);
-            }
             _carDal.Add(car);
             return new SuccessResult(Messages.EntityAdded);
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car car)
         {
-            if (!_carCheckService.CheckCarRules(car))
-            {
-                return new ErrorResult(Messages.EntityInvalid);
-            }
             _carDal.Update(car);
             return new SuccessResult(Messages.EntityAdded);
         }
