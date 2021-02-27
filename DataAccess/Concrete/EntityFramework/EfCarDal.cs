@@ -32,5 +32,24 @@ namespace DataAccess.Concrete.EntityFramework
                 return result.ToList();
             }
         }
+        public List<CarImageDetailDto> GetCarImagesById(int carId)
+        {
+            using (ReCapProjectDBContext context = new ReCapProjectDBContext())
+            {
+                var result = from c in context.Cars
+                             join i in context.CarImages
+                             on c.Id equals i.CarId
+                             where i.CarId == carId
+                             select new CarImageDetailDto
+                             {
+                                 Id = i.Id,
+                                 CarId = c.Id,
+                                 CarDescription = c.CarDescription,
+                                 ImagePath = i.ImagePath,
+                                 ImageDate = i.ImageDate
+                             };
+                return result.ToList();
+            }
+        }
     }
 }

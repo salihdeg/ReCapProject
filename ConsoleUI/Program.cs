@@ -10,7 +10,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new EfCarDal(), new CheckRules());
+            CarManager carManager = new CarManager(new EfCarDal());
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
             UserManager userManager = new UserManager(new EfUserDal());
@@ -35,7 +35,7 @@ namespace ConsoleUI
             //rentalManager.Add(rental1,carManager.GetById(rental1.CarId).Data);
 
             //GetAllRentalDetails(rentalManager);
-
+            
         }
 
         private static void GetAllRentalDetails(RentalManager rentalManager)

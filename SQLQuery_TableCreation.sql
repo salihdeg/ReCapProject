@@ -52,3 +52,10 @@ CustomerId int foreign key references Customers(Id),
 RentDate date not null,
 ReturnDate date,
 )
+
+create table CarImages(
+ID int primary key identity(1,1),
+CarId int foreign key references Cars(Id),
+ImagePath nvarchar(max),
+ImageDate date
+)

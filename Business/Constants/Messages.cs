@@ -15,5 +15,6 @@ namespace Business.Constants
         public static string EntityInvalid = "Nesne Kural Dışı";
         public static string DefaultError = "Bir Hata Oldu";
         public static string NotAvailable = "Müsait Değil";
+        public static string MaxImageOfCarExceeded = "Arabanın Maximum Resmi Aşıldı";
     }
 }
