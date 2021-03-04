@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Performance;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
@@ -47,6 +48,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        [PerformanceAspect(5)]
         public IDataResult<List<CarImage>> GetAll()
         {
             var result = _carImageDal.GetAll();

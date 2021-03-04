@@ -2,6 +2,7 @@
 using Business.BusinessAspectts.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation.FluentValidation;
 using Core.Utilities.Results;
@@ -11,7 +12,7 @@ using Entities.DTOs;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using static Core.Aspects.Autofac.Caching.CacheAspect;
 
 namespace Business.Concrete
 {
@@ -24,13 +25,9 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
+        [CacheAspect]
         public IDataResult<List<Car>> GetAll()
         {
-            //if (DateTime.Now.Hour == 22)
-            //{
-            //    return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
-            //}
-
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.Listed);
         }
 
@@ -50,40 +47,49 @@ namespace Business.Concrete
 
         [SecuredOperation("car.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car car)
         {
             _carDal.Add(car);
             return new SuccessResult(Messages.EntityAdded);
         }
 
+        [SecuredOperation("car.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(Car car)
         {
             _carDal.Update(car);
             return new SuccessResult(Messages.EntityAdded);
         }
 
+        [SecuredOperation("car.add,admin")]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
             return new SuccessResult(Messages.Deleted);
         }
 
+        [CacheAspect]
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
 
+        [CacheAspect]
         public IDataResult<Car> GetById(int id)
         {
             return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == id));
         }
 
+        [CacheAspect]
         public IDataResult<List<Car>> GetAvailableCars()
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.IsAvailable == true));
         }
 
+        [CacheAspect]
         public IDataResult<List<CarImageDetailDto>> GetCarImagesById(int carId)
         {
             var result = _carDal.GetCarImagesById(carId);
@@ -95,11 +101,13 @@ namespace Business.Concrete
             }
             return new SuccessDataResult<List<CarImageDetailDto>>(result);
         }
+        #region BusinessRules
         private List<CarImageDetailDto> IfCarHasNoImages(int carId)
         {
             Car car = _carDal.Get(c => c.Id == carId);
             List<CarImageDetailDto> errorResult = new List<CarImageDetailDto>() { new CarImageDetailDto { CarId = car.Id, CarDescription = car.CarDescription, ImageDate = DateTime.Now, ImagePath = ImageInfo.DefaultImage } };
             return errorResult;
         }
+        #endregion
     }
 }
