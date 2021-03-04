@@ -7,8 +7,10 @@ using System.Text;
 
 namespace Business.Abstract
 {
-    public interface ICarImageService : IEntityServiceBase<CarImage>
+    public interface ICarImageService
     {
+        IDataResult<List<CarImage>> GetAll();
+        IDataResult<CarImage> GetById(int id);
         IResult Add(CarImage carImage);
         IResult Update(CarImage carImage);
         IResult Delete(CarImage carImage);

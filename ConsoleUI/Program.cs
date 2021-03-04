@@ -73,28 +73,28 @@ namespace ConsoleUI
         private static void ListAllUsers(UserManager userManager)
         {
             Console.WriteLine("Kullanıcılar: ");
-            foreach (var item in userManager.GetAll().Data)
-            {
-                Console.WriteLine("{0} {1}", item.FirstName, item.LastName);
-            }
+            //foreach (var item in userManager.GetAll().Data)
+            //{
+            //    Console.WriteLine("{0} {1}", item.FirstName, item.LastName);
+            //}
         }
 
         private static void AddTwoUser(UserManager userManager)
         {
-            userManager.Add(new User
-            {
-                FirstName = "Salih",
-                LastName = "Değirmenci",
-                Email = "salihdegirmenci99@gmail.com",
-                UserPassword = "sd123456"
-            });
-            userManager.Add(new User
-            {
-                FirstName = "Engin",
-                LastName = "Demiroğ",
-                Email = "engindemirog@gmail.com",
-                UserPassword = "ed123456"
-            });
+            //userManager.Add(new User
+            //{
+            //    FirstName = "Salih",
+            //    LastName = "Değirmenci",
+            //    Email = "salihdegirmenci99@gmail.com",
+            //    UserPassword = "sd123456"
+            //});
+            //userManager.Add(new User
+            //{
+            //    FirstName = "Engin",
+            //    LastName = "Demiroğ",
+            //    Email = "engindemirog@gmail.com",
+            //    UserPassword = "ed123456"
+            //});
         }
 
         private static void ListAllCarDetails(CarManager carManager)

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspectts.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -35,7 +36,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetCarsByBrandId(int id)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c=>c.BrandId==id));
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == id));
         }
         public IDataResult<List<Car>> GetCarsByColorId(int id)
         {
@@ -44,9 +45,10 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetByDailyPrice(decimal min, decimal max)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c=>c.DailyPrice>=min && c.DailyPrice<=max));
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max));
         }
 
+        [SecuredOperation("car.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
@@ -74,19 +76,30 @@ namespace Business.Concrete
 
         public IDataResult<Car> GetById(int id)
         {
-            return new SuccessDataResult<Car>(_carDal.Get(c=>c.Id==id));
+            return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == id));
         }
 
         public IDataResult<List<Car>> GetAvailableCars()
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c=>c.IsAvailable == true));
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.IsAvailable == true));
         }
 
         public IDataResult<List<CarImageDetailDto>> GetCarImagesById(int carId)
         {
             var result = _carDal.GetCarImagesById(carId);
-            //if result null???
+
+            if (result.Count == 0)
+            {
+                var errorResult = IfCarHasNoImages(carId);
+                return new ErrorDataResult<List<CarImageDetailDto>>(errorResult);
+            }
             return new SuccessDataResult<List<CarImageDetailDto>>(result);
+        }
+        private List<CarImageDetailDto> IfCarHasNoImages(int carId)
+        {
+            Car car = _carDal.Get(c => c.Id == carId);
+            List<CarImageDetailDto> errorResult = new List<CarImageDetailDto>() { new CarImageDetailDto { CarId = car.Id, CarDescription = car.CarDescription, ImageDate = DateTime.Now, ImagePath = ImageInfo.DefaultImage } };
+            return errorResult;
         }
     }
 }
