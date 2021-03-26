@@ -89,12 +89,5 @@ namespace Business.Concrete
             carImage.ImageDate = DateTime.Now;
             return new SuccessResult();
         }
-        private IResult ChangeImageNameAndCopy(CarImage carImage)
-        {
-            var newName = ImageInfo.DefaultImageFolder + Guid.NewGuid().ToString();
-            File.Copy(carImage.ImagePath,newName);
-            carImage.ImagePath = newName;
-            return new SuccessResult();
-        }
     }
 }

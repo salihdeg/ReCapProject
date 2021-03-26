@@ -2,6 +2,7 @@
 using Business.Constants;
 using Core.Utilities.FileOperations;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -18,9 +19,11 @@ namespace WebAPI.Controllers
     public class CarImagesController : ControllerBase
     {
         ICarImageService _carImageService;
-        public CarImagesController(ICarImageService carImageService)
+        IWebHostEnvironment _webHostEnvironment;
+        public CarImagesController(ICarImageService carImageService, IWebHostEnvironment webHostEnvironment)
         {
             _carImageService = carImageService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet("getall")]
@@ -54,7 +57,7 @@ namespace WebAPI.Controllers
             }
             CarImage carImage = JsonConvert.DeserializeObject<CarImage>(carImageString);
 
-            string path = ImageInfo.DefaultImageFolder;
+            string path = _webHostEnvironment.WebRootPath + @"\images\";
             string newFileNameWithGUID = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
 
             bool fileCreate = ImageOperations.CopyFileToServer(image, path, newFileNameWithGUID);
@@ -101,7 +104,7 @@ namespace WebAPI.Controllers
             }
             else
             {
-                string path = ImageInfo.DefaultImageFolder;
+                string path = _webHostEnvironment.WebRootPath + @"\images\";
                 string newFileNameWithGUID = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
                 if (!ImageOperations.DeleteFileFromServer(carImage.ImagePath)) return BadRequest(Messages.FileDeleteError);
                 if(!ImageOperations.CopyFileToServer(image, path, newFileNameWithGUID)) return BadRequest(Messages.FileCreateError);

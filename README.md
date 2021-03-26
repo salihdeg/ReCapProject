@@ -1,15 +1,22 @@
 # ReCapProject
-Software Developer Training Camp Day 7 Homework!
+## This is a Car Rental Project
 
-You'll find an .sql file. You can use it for creating database and tables and inserting some data.
+### Development process continues!
 
-Edit 07.02.2021  Day 9 Homework https://www.kodlama.io/courses/1235979/lectures/30254313
+## Table of Contents
+* [General Info](#general-info)
+* [Technologies](#technologies)
 
-Edit 11.02.2021 Day 10 Homework-1 https://www.kodlama.io/courses/1235979/lectures/30341342
 
-Edit 15.02.2021 Day 11 Homework https://www.kodlama.io/courses/1235979/lectures/30416969
+## General Info
+This project was created as a multi-layered architecture in accordance with SOLID and OOP principles
 
-Edit 19.02.2021 Day 12 Homeworks:
-  https://www.kodlama.io/courses/1235979/lectures/30497995
-  https://www.kodlama.io/courses/1235979/lectures/30498006
-  https://www.kodlama.io/courses/1235979/lectures/30498008
+Includes AOP, IoC and various Cross Cutting Concern structures.
+
+This project has a Restful API,
+	The Frontend project using it -> [ReCapProject - Frontend](https://github.com/salihdeg/recap-project-frontend)
+
+## Technologies
+* Autofac
+* FluentValidation
+* Entity Framework

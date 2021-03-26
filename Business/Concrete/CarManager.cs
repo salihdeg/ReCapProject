@@ -101,6 +101,11 @@ namespace Business.Concrete
             }
             return new SuccessDataResult<List<CarImageDetailDto>>(result);
         }
+        public IDataResult<CarDetailDto> GetCarDetailsById(int carId)
+        {
+            var result = _carDal.GetCarDetailsById(carId);
+            return new SuccessDataResult<CarDetailDto>(result);
+        }
         #region BusinessRules
         private List<CarImageDetailDto> IfCarHasNoImages(int carId)
         {

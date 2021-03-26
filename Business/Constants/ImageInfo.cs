@@ -7,7 +7,6 @@ namespace Business.Constants
 {
     public static class ImageInfo
     {
-        //public static string DefaultImageFolder = AppDomain.CurrentDomain.DynamicDirectory + @"Images\";
         public static string DefaultImageFolder = Directory.GetParent(Directory.GetCurrentDirectory()) + @"\Images\";
         public static string DefaultImage = DefaultImageFolder+ "defaultLogo.jpg";
     }

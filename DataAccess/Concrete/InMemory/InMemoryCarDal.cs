@@ -60,6 +60,11 @@ namespace DataAccess.Concrete.InMemory
             throw new NotImplementedException();
         }
 
+        public CarDetailDto GetCarDetailsById(int carId)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<CarImageDetailDto> GetCarImagesById(int carId)
         {
             throw new NotImplementedException();
@@ -74,6 +79,11 @@ namespace DataAccess.Concrete.InMemory
             carToUpdate.CarDescription = car.CarDescription;
             carToUpdate.ModelYear = car.ModelYear;
             Console.WriteLine("Updated!");
+        }
+
+        CarDetailDto ICarDal.GetCarDetailsById(int carId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
