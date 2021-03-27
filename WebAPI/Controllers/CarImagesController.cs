@@ -56,8 +56,9 @@ namespace WebAPI.Controllers
                 return BadRequest("File not found");
             }
             CarImage carImage = JsonConvert.DeserializeObject<CarImage>(carImageString);
-
-            string path = _webHostEnvironment.WebRootPath + @"\images\";
+            string firstURL = _webHostEnvironment.WebRootPath;
+            //string firstURL = "http://127.0.0.1:8080";
+            string path = firstURL + @"\images\";
             string newFileNameWithGUID = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
 
             bool fileCreate = ImageOperations.CopyFileToServer(image, path, newFileNameWithGUID);
@@ -104,7 +105,9 @@ namespace WebAPI.Controllers
             }
             else
             {
-                string path = _webHostEnvironment.WebRootPath + @"\images\";
+                string firstURL = _webHostEnvironment.WebRootPath;
+                //string firstURL = "http://127.0.0.1:8080";
+                string path = firstURL + @"\images\";
                 string newFileNameWithGUID = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
                 if (!ImageOperations.DeleteFileFromServer(carImage.ImagePath)) return BadRequest(Messages.FileDeleteError);
                 if(!ImageOperations.CopyFileToServer(image, path, newFileNameWithGUID)) return BadRequest(Messages.FileCreateError);

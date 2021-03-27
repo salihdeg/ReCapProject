@@ -97,7 +97,7 @@ namespace Business.Concrete
             if (result.Count == 0)
             {
                 var errorResult = IfCarHasNoImages(carId);
-                return new ErrorDataResult<List<CarImageDetailDto>>(errorResult);
+                return new SuccessDataResult<List<CarImageDetailDto>>(errorResult);
             }
             return new SuccessDataResult<List<CarImageDetailDto>>(result);
         }

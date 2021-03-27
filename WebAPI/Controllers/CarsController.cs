@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -111,6 +112,12 @@ namespace WebAPI.Controllers
         public IActionResult GetCarImagesById(int carId)
         {
             var result = _carService.GetCarImagesById(carId);
+            string firstURL = "http://127.0.0.1:8080";
+            string path = firstURL + @"\images\";
+            for (int i = 0; i < result.Data.Count; i++)
+            {
+                result.Data[i].ImagePath = path + Path.GetFileName(result.Data[i].ImagePath);
+            }
             if (result.Success)
             {
                 return Ok(result);
