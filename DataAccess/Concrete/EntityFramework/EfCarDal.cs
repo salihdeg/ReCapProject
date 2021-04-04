@@ -24,6 +24,73 @@ namespace DataAccess.Concrete.EntityFramework
                              on c.ColorId equals cl.ColorId
                              select new CarDetailDto
                              {
+                                 CarId = c.Id,
+                                 BrandName = b.BrandName,
+                                 CarDescription = c.CarDescription,
+                                 ColorName = cl.ColorName,
+                                 DailyPrice = c.DailyPrice
+                             };
+                return result.ToList();
+            }
+        }
+
+        public List<CarDetailDto> GetCarDetailsByBrandAndColorId(int brandId, int colorId)
+        {
+            using (ReCapProjectDBContext context = new ReCapProjectDBContext())
+            {
+                var result = from c in context.Cars
+                             join b in context.Brands
+                             on c.BrandId equals b.BrandId
+                             join cl in context.Colors
+                             on c.ColorId equals cl.ColorId
+                             where c.ColorId == colorId && c.BrandId == brandId
+                             select new CarDetailDto
+                             {
+                                 CarId = c.Id,
+                                 BrandName = b.BrandName,
+                                 CarDescription = c.CarDescription,
+                                 ColorName = cl.ColorName,
+                                 DailyPrice = c.DailyPrice
+                             };
+                return result.ToList();
+            }
+        }
+
+        public List<CarDetailDto> GetCarDetailsByBrandId(int brandId)
+        {
+            using (ReCapProjectDBContext context = new ReCapProjectDBContext())
+            {
+                var result = from c in context.Cars
+                             join b in context.Brands
+                             on c.BrandId equals b.BrandId
+                             join cl in context.Colors
+                             on c.ColorId equals cl.ColorId
+                             where c.BrandId == brandId
+                             select new CarDetailDto
+                             {
+                                 CarId = c.Id,
+                                 BrandName = b.BrandName,
+                                 CarDescription = c.CarDescription,
+                                 ColorName = cl.ColorName,
+                                 DailyPrice = c.DailyPrice
+                             };
+                return result.ToList();
+            }
+        }
+
+        public List<CarDetailDto> GetCarDetailsByColorId(int colorId)
+        {
+            using (ReCapProjectDBContext context = new ReCapProjectDBContext())
+            {
+                var result = from c in context.Cars
+                             join b in context.Brands
+                             on c.BrandId equals b.BrandId
+                             join cl in context.Colors
+                             on c.ColorId equals cl.ColorId
+                             where c.ColorId == colorId
+                             select new CarDetailDto
+                             {
+                                 CarId = c.Id,
                                  BrandName = b.BrandName,
                                  CarDescription = c.CarDescription,
                                  ColorName = cl.ColorName,
@@ -45,6 +112,7 @@ namespace DataAccess.Concrete.EntityFramework
                              where c.Id == carId
                              select new CarDetailDto
                              {
+                                 CarId = c.Id,
                                  BrandName = b.BrandName,
                                  CarDescription = c.CarDescription,
                                  ColorName = cl.ColorName,

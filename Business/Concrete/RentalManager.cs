@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Aspects.Autofac.Transaction;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -19,6 +20,7 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
             _carDal = carDal;
         }
+        [TransactionScopeAspect]
         public IResult Add(Rental entity)
         {
             Car car = _carDal.Get(c => c.Id == entity.CarId);
@@ -27,19 +29,12 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.NotAvailable);
             }
-            try
-            {
-                _rentalDal.Add(entity);
-                car.IsAvailable = false;
-                _carDal.Update(car);
-                return new SuccessResult();
-            }
-            catch (Exception)
-            {
-                return new ErrorResult(Messages.DefaultError);
-            }
+            _rentalDal.Add(entity);
+            car.IsAvailable = false;
+            _carDal.Update(car);
+            return new SuccessResult();
         }
-
+        [TransactionScopeAspect]
         public IResult Delete(Rental entity)
         {
             try
@@ -91,7 +86,7 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<RentalDetailDto>>(Messages.DefaultError);
             }
         }
-
+        [TransactionScopeAspect]
         public IResult Update(Rental entity)
         {
             try

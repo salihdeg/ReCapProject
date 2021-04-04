@@ -31,15 +31,17 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.Listed);
         }
 
+        [CacheAspect]
         public IDataResult<List<Car>> GetCarsByBrandId(int id)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == id));
         }
+        [CacheAspect]
         public IDataResult<List<Car>> GetCarsByColorId(int id)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id));
         }
-
+        [CacheAspect]
         public IDataResult<List<Car>> GetByDailyPrice(decimal min, decimal max)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max));
@@ -105,6 +107,23 @@ namespace Business.Concrete
         {
             var result = _carDal.GetCarDetailsById(carId);
             return new SuccessDataResult<CarDetailDto>(result);
+        }
+        public IDataResult<List<CarDetailDto>> GetCarDetailsByBrandId(int brandId)
+        {
+            var result = _carDal.GetCarDetailsByBrandId(brandId);
+            return new SuccessDataResult<List<CarDetailDto>>(result);
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetailsByColorId(int colorId)
+        {
+            var result = _carDal.GetCarDetailsByColorId(colorId);
+            return new SuccessDataResult<List<CarDetailDto>>(result);
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetailsByBrandAndColorId(int brandId, int colorId)
+        {
+            var result = _carDal.GetCarDetailsByBrandAndColorId(brandId,colorId);
+            return new SuccessDataResult<List<CarDetailDto>>(result);
         }
         #region BusinessRules
         private List<CarImageDetailDto> IfCarHasNoImages(int carId)
