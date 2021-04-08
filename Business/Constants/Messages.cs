@@ -26,7 +26,7 @@ namespace Business.Constants
         public static string PasswordError = "Paralo Hatası";
         public static string SuccessfulLogin = "Giriş Başarılı";
         public static string UserAlreadyExists = "Kullanıcı Zaten Kayıtlı";
-        public static string AccessTokenCreated = "Erişim Jetonu Oluşturuldu";
+        public static string AccessTokenCreated = "Signed in ";
         public static string PaymentSuccess = "Payment Success";
     }
 }
