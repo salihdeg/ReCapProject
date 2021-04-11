@@ -22,8 +22,8 @@ namespace WebAPI.Controllers
         [HttpPost("getpayment")]
         public IActionResult GetPayment(PaymentQuery paymentQuery)
         {
-            PaymentInfo paymentInfo = paymentQuery.paymentInfo;
-            Rental rental = paymentQuery.rental;
+            PaymentInfo paymentInfo = paymentQuery.PaymentInfo;
+            Rental rental = paymentQuery.Rental;
             var result = _paymentService.GetPayment(paymentInfo, rental);
             return Ok(result);
         }

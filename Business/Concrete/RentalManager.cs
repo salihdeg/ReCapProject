@@ -37,15 +37,9 @@ namespace Business.Concrete
         [TransactionScopeAspect]
         public IResult Delete(Rental entity)
         {
-            try
-            {
-                _rentalDal.Delete(entity);
-                return new SuccessResult();
-            }
-            catch (Exception)
-            {
-                return new ErrorResult(Messages.DefaultError);
-            }
+            _rentalDal.Delete(entity);
+            return new SuccessResult();
+
         }
 
         public IDataResult<List<Rental>> GetAll()

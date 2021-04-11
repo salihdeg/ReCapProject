@@ -18,13 +18,14 @@ namespace DataAccess.Concrete.EntityFramework
                 var result = from r in context.Rentals
                              join c in context.Cars
                              on r.CarId equals c.Id
-                             join customer in context.Customers
-                             on r.CustomerId equals customer.Id
+                             join user in context.Users
+                             on r.UserId equals user.Id
                              select new RentalDetailDto
                              {
                                  Id = r.Id,
                                  CarDescription = c.CarDescription,
-                                 CompanyName = customer.CompanyName,
+                                 UserFirstName = user.FirstName,
+                                 UserLastName = user.LastName,
                                  RentDate = r.RentDate,
                                  ReturnDate = r.ReturnDate
                              };

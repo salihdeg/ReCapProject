@@ -7,7 +7,7 @@ namespace Entities.Concrete
 {
     public class PaymentQuery : IEntity
     {
-        public PaymentInfo paymentInfo { get; set; }
-        public Rental rental { get; set; }
+        public PaymentInfo PaymentInfo { get; set; }
+        public Rental Rental { get; set; }
     }
 }

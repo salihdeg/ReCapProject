@@ -10,6 +10,6 @@ namespace Entities.Concrete
         public string CardNumber { get; set; }
         public string CardType { get; set; }
         public DateTime ExpiryDate { get; set; }
-        public string CVC { get; set; }
+        public string Cvc { get; set; }
     }
 }

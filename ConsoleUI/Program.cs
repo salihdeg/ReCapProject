@@ -43,7 +43,7 @@ namespace ConsoleUI
             Console.WriteLine();
             foreach (var rental in rentalManager.GetRentalDetail().Data)
             {
-                Console.WriteLine("{0} {1} {2} {3} ", rental.CarDescription, rental.CompanyName, rental.RentDate, rental.ReturnDate);
+                Console.WriteLine("{0} {1} {2} {3} ", rental.CarDescription, rental.UserFirstName, rental.RentDate, rental.ReturnDate);
             }
         }
 
