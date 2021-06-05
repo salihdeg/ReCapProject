@@ -1,8 +1,6 @@
 # ReCapProject
 ## This is a Car Rental Project
 
-### Development process continues!
-
 ## Table of Contents
 * [General Info](#general-info)
 * [Technologies](#technologies)
@@ -14,9 +12,11 @@ This project was created as a multi-layered architecture in accordance with SOLI
 Includes AOP, IoC and various Cross Cutting Concern structures.
 
 This project has a Restful API,
-	The Frontend project using it -> [ReCapProject - Frontend](https://github.com/salihdeg/recap-project-frontend)
+	This is the link of The Angular Frontend project using it. -> [ReCapProject - Frontend](https://github.com/salihdeg/recap-project-frontend)
 
 ## Technologies
+* .NET
+* ASP.NET for Restful api
 * Autofac
 * FluentValidation
 * Entity Framework
