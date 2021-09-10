@@ -40,6 +40,7 @@ namespace WebAPI
             services.AddControllers();
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
             services.AddCors();
+            services.AddSwaggerGen();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -67,6 +68,13 @@ namespace WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.ConfigureCustomExceptionMiddleware();
 
