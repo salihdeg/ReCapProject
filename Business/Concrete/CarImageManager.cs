@@ -58,6 +58,10 @@ namespace Business.Concrete
         public IDataResult<CarImage> GetById(int id)
         {
             var result = _carImageDal.Get(cI => cI.CarId == id);
+            if (result == null)
+            {
+                return new SuccessDataResult<CarImage>(IfCarHasNoImages(id));
+            }
             return new SuccessDataResult<CarImage>(result);
         }
 
@@ -76,8 +80,8 @@ namespace Business.Concrete
 
         private IResult CheckMaxCarImageOfCar(int carId)
         {
-            var imageCount = _carImageDal.GetAll(carImage=> carImage.CarId == carId).Count;
-            if (imageCount>=5)
+            var imageCount = _carImageDal.GetAll(carImage => carImage.CarId == carId).Count;
+            if (imageCount >= 5)
             {
                 return new ErrorResult(Messages.MaxImageOfCarExceeded);
             }
@@ -88,6 +92,13 @@ namespace Business.Concrete
         {
             carImage.ImageDate = DateTime.Now;
             return new SuccessResult();
+        }
+
+        private CarImage IfCarHasNoImages(int carId)
+        {
+            CarImage car = _carImageDal.Get(c => c.Id == carId);
+            CarImage errorResult = new CarImage { CarId = car.Id, ImageDate = DateTime.Now, ImagePath = ImageInfo.DefaultImage };
+            return errorResult;
         }
     }
 }
