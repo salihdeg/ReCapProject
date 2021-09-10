@@ -8,6 +8,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -58,11 +59,21 @@ namespace Business.Concrete
         public IDataResult<CarImage> GetById(int id)
         {
             var result = _carImageDal.Get(cI => cI.CarId == id);
-            if (result == null)
-            {
-                return new SuccessDataResult<CarImage>(IfCarHasNoImages(id));
-            }
+            
             return new SuccessDataResult<CarImage>(result);
+        }
+
+        public IDataResult<List<CarImage>> GetByCarID(int carId)
+        {
+            var result = BusinessRules.Run(IfCarHasNoImages(carId));
+
+            if (result != null)
+            {
+                return (IDataResult<List<CarImage>>)result;
+            }
+
+            var images = _carImageDal.GetAll(cI => cI.CarId == carId);
+            return new SuccessDataResult<List<CarImage>>(images, Messages.Success);
         }
 
         [ValidationAspect(typeof(CarImageValidator))]
@@ -94,11 +105,16 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        private CarImage IfCarHasNoImages(int carId)
+        private IDataResult<List<CarImage>> IfCarHasNoImages(int carId)
         {
-            CarImage car = _carImageDal.Get(c => c.Id == carId);
-            CarImage errorResult = new CarImage { CarId = car.Id, ImageDate = DateTime.Now, ImagePath = ImageInfo.DefaultImage };
-            return errorResult;
+            var result = _carImageDal.GetAll(cI => cI.CarId == carId);
+
+            if (result.Count == 0)
+            {
+                List<CarImage> errorResult = new List<CarImage> { new CarImage { CarId = carId, ImageDate = DateTime.Now, ImagePath = ImageInfo.DefaultImage } };
+                return new ErrorDataResult<List<CarImage>>(errorResult, Messages.CarHasNoImages);
+            }
+            return new SuccessDataResult<List<CarImage>>();
         }
     }
 }
