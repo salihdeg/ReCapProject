@@ -1,5 +1,5 @@
 # ReCapProject
-## This is a Car Rental Project
+## A Car Rental Project
 
 ## Table of Contents
 * [General Info](#general-info)
